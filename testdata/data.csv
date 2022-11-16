@@ -1,2 +1,2 @@
-province,make,model,sort_by
-Ontario,Dodge,Grand Caravan,Price: Low to High
+province,make,model,sort_by,car_name,delivery_address,warranty,downpayment
+Ontario,Dodge,Grand Caravan,Price: Low to High,2016 Dodge,L-30 Beech Ave,48,500
