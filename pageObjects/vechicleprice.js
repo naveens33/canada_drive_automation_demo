@@ -24,6 +24,12 @@ module.exports = {
         },
         downPayment:{
             selector: '.down-payment-input__input'
+        },
+        addressSelected:{
+            selector:'p.app-cpost-result__address >span'
+        },
+        deliveryCost:{
+            selector: 'div.delivery__cost h2'
         }
     },
     commands: [{
@@ -31,27 +37,42 @@ module.exports = {
             return this
                     .pause(1000)
                     .click('@deliveryOrPickUp')
+                    .pause(1000)
                     .click(selector)
                     .pause(1000)
                     .sendKeys(selector,address)
+                    .pause(1000)
+                    .sendKeys(selector," ")
                     .pause(1000)
                     .sendKeys(selector,browser.Keys.ENTER)
                     .pause(1000)
                     .click('@saveButton')
         },
+        getPageTitle(){
+            return this.getTitle();
+        },
         selectWarranty(selector,Warranty){
             return this 
                 .click('@selectWarrantyCard')
+                .pause(1000)
                 .click(selector)
                 .pause(1000)
                 .click('xpath','//div[contains(@class,"v-menu__content")]//div[contains(text(),"'+Warranty +' months")]')
-                .pause(1000)
+                .pause(2000)
                 .click('@saveButton1')
             },
         enterDownPayment(selector,payment){
             return this
                 .pause(1000)
                 .setValue(selector,payment)
+        },
+        getSelectedAddress(selector){
+            return this
+            .getText(selector)
+        },
+        getDeliveryCost(selector){
+            return this
+            .getText(selector)
         }
     }]
   };

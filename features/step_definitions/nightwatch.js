@@ -7,7 +7,7 @@ Given(/^I open the canada drives site$/, function() {
     browser.navigateTo('https://shop.canadadrives.ca/cars/bc');
     var myMap = {};
     var fs = require("fs");
-    data = fs.readFileSync("C:\\Users\\Naveen S\\canada_drive_automation_demo\\testdata\\data.csv").toLocaleString();
+    data = fs.readFileSync("testdata\\data.csv").toLocaleString();
     rows = data.split("\n");
 });
 
@@ -28,10 +28,7 @@ When('I select the province', function () {
 
 Then('the title is {string}', function (title) {
   const page = browser.page.carslist();
-  page.getPageTitle(function(title) {
-    this.assert.equal(typeof title, 'string');
-    this.assert.equal(title, title);
-  });
+  return browser.assert.titleEquals(title);
 });
 
 
@@ -77,3 +74,21 @@ When('I enter downpayment', function () {
   const page = browser.page.vechicleprice();
   page.enterDownPayment('@downPayment',rows[1].split(",")[7])
 });
+
+Then('I navigated to selected car page', function () {
+  const page = browser.page.cardetailview();
+  return browser.assert.titleEquals(rows[1].split(",")[4]+" "+rows[1].split(",")[2]);
+});
+
+Then('I navigated to Payment calculation page', function () {
+  const page = browser.page.carslist();
+  return browser.assert.titleEquals("Bought Online, Delivered to Your Door - Canada Drives");
+});
+
+Then('Address selected and delivery fee is ${int}', function (int) {
+  const page = browser.page.vechicleprice();
+  browser.pause(2000);
+  browser.assert.textContains(page.getSelectedAddress('@addressSelected'),rows[1].split(",")[5]);
+  browser.pause(2000)
+  browser.assert.textEquals(page.getDeliveryCost('@deliveryCost'),"$0");
+  });

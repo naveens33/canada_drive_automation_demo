@@ -9,10 +9,12 @@ Background: Singin and Navigate to Ontario province site
 Scenario: Canada Drive Automation Demo Scenario1
   When I filter Make/Model
   And I select sort by "Price: Low to High"
-  #And I favourite 3 "Dodge" - "Grand Caravan"
+  And I favourite 3 "Dodge" - "Grand Caravan"
   And I select the car
-  And I click the Start Purchase
-  And I set delivery address
+  Then I navigated to selected car page
+  When I click the Start Purchase
+  Then I navigated to Payment calculation page
+  When I set delivery address
   And I set warranty
   And I enter downpayment
   

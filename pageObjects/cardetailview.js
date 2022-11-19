@@ -13,6 +13,9 @@ module.exports = {
                 .pause(5000)
                 .click(selector)
                 .pause(10000)
+        },
+        getPageTitle(){
+            return this.getTitle();
         }
     }]
   };
